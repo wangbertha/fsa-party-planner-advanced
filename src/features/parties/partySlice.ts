@@ -8,9 +8,16 @@ const partyApi = api.injectEndpoints({
             transformErrorResponse: (response) => response.data.error,
             providesTags: ["Party"],
         }),
+        getParty: build.query({
+            query: (id) => "events/" + id,
+            transformResponse: (response) => response.data,
+            transformErrorResponse: (response) => response.data.error,
+            providesTags: ["Party"],
+        })
     })
 });
 
 export const { 
     useGetPartiesQuery,
+    useGetPartyQuery,
 } = partyApi;
