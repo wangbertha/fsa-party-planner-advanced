@@ -13,11 +13,20 @@ const partyApi = api.injectEndpoints({
             transformResponse: (response) => response.data,
             transformErrorResponse: (response) => response.data.error,
             providesTags: ["Party"],
-        })
-    })
+        }),
+        deleteParty: build.mutation({
+            query: (id) => ({
+                url: "events/" + id,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Party"],
+            transformErrorResponse: (response) => response.data.error,
+        }),
+    }),
 });
 
 export const { 
     useGetPartiesQuery,
     useGetPartyQuery,
+    useDeletePartyMutation,
 } = partyApi;
