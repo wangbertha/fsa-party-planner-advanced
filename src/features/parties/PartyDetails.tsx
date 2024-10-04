@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDeletePartyMutation, useGetPartyQuery } from "./partySlice";
 
 export default function PartyDetails() {
@@ -7,8 +7,11 @@ export default function PartyDetails() {
 
   const [deleteParty] = useDeletePartyMutation();
 
+  const navigate = useNavigate();
+
   function removeParty(id) {
     deleteParty(id);
+    navigate("/");
   }
 
   if (isLoading) {
@@ -28,9 +31,7 @@ export default function PartyDetails() {
           <p>{party.date}</p>
           <p>{party.location}</p>
           <p>{party.description}</p>
-          <button onClick={() => removeParty(party.id)}>
-            <Link to="/">Delete Party</Link>
-          </button>
+          <button onClick={() => removeParty(party.id)}>Delete Party</button>
         </>
       ) : (
         <p>There is no selected party</p>
