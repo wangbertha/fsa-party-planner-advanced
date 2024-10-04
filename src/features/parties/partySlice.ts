@@ -22,6 +22,14 @@ const partyApi = api.injectEndpoints({
             invalidatesTags: ["Party"],
             transformErrorResponse: (response) => response.data.error,
         }),
+        addParty: build.mutation({
+            query: (party) => ({
+                url: "events", 
+                method: "POST",
+                body: party,
+            }),
+            invalidatesTags: ["Party"],
+        }),
     }),
 });
 
@@ -29,4 +37,5 @@ export const {
     useGetPartiesQuery,
     useGetPartyQuery,
     useDeletePartyMutation,
+    useAddPartyMutation,
 } = partyApi;
